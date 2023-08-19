@@ -32,7 +32,7 @@ jobs:
       run: git clone https://github.com/Open360Camera/camera_engine_rkaiq_debian
 
     - name: Build kernel packages
-      run: cd camera_engine_rkaiq_debian && ./build.sh
+      run: cd camera_engine_rkaiq_debian && bash ./build.sh
 
     - name: Copy dpkgs to resulting directory
       run: mkdir -p artifacts && cp -r camera_engine_rkaiq_debian/build/*.deb artifacts/
