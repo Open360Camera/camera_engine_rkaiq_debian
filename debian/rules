@@ -1,0 +1,66 @@
+#!/usr/bin/make -f
+#-*- makefile -*-
+
+export DH_VERBOSE=1
+export SHELL	:= /bin/bash
+
+DPKG_VARS			:= $(shell dpkg-architecture)
+DEB_BUILD_MULTIARCH		?= $(call vafilt,$(DPKG_VARS),DEB_BUILD_MULTIARCH)
+DEB_HOST_MULTIARCH		?= $(call vafilt,$(DPKG_VARS),DEB_HOST_MULTIARCH)
+
+srcname			:= rkaiq
+name			:= $(srcname)
+buildroot		:= $(CURDIR)/debian/tmp
+cmaketmp		:= $(CURDIR)/debian/build
+_sourcedir		:= debian/source
+
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+
+override_dh_auto_install:
+	# Install files and directories
+	mkdir -p $(buildroot)
+
+	cp -r root/* $(buildroot)/
+
+	# ######################################################################
+	# Packaging
+	dh_movefiles -p$(name)d \
+		./usr/bin/ \
+		./etc/init.d
+	dh_movefiles -p$(name)-iqfiles \
+		./etc/
+	dh_movefiles -plib$(name) \
+		./lib/
+	dh_movefiles -p$(name)-dev \
+		./include
+	dh_movefiles -p$(name) \
+		.
+
+override_dh_shlibdeps:
+	echo
+
+override_dh_fixperms:
+	dh_fixperms
+
+
+override_dh_auto_test:
+
+override_dh_strip:
+
+override_dh_auto_clean:
+	echo $(buildroot)
+	echo $(cmaketmp)
+
+override_dh_builddeb:
+	dh_builddeb
+	if [ $(shell find $(buildroot) -type f | wc -l) -gt 0 ]; then \
+		echo "Installed but unpackaged:"; \
+		find $(buildroot) -type f -exec echo "{}" \; | sed -e 's#$(buildroot)##g'; \
+		exit 1; \
+	fi

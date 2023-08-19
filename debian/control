@@ -1,0 +1,26 @@
+Source: rkaiq
+Section: devel
+Priority: optional
+Maintainer: Monstrofil <shalal545@gmail.com>
+Build-Depends: debhelper (>= 9)
+Homepage: https://github.com/Open360Camera/camera_engine_rkaiq_debian
+
+Package: rkaiq
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, rkaiq-iqfiles, librkaiq, rkaiq-dev, rkaiqd
+
+Package: rkaiq-iqfiles
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+
+Package: librkaiq
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+
+Package: rkaiqd
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+
+Package: rkaiq-dev
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
