@@ -5,6 +5,8 @@ pushd build
   [ ! -d "camera_engine_rkaiq" ] && \
     git clone https://gitlab.com/rk3588_linux/linux/external/camera_engine_rkaiq.git --depth 1
 
+  apt install -y ninja-build m4 debhelper
+
   mkdir -p builder
   pushd builder
     git clone https://gitlab.com/rk3588_linux/rk/kernel.git --depth 1
@@ -16,7 +18,7 @@ pushd build
     git clone https://gitlab.com/rk3588_linux/linux/buildroot.git
   popd
 
-  cp configs/.config builder/buildroot/.config
+  cp ../configs/.config builder/buildroot/.config
   pushd builder/buildroot
     make -j 8
   popd
