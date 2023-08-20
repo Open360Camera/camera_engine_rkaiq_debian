@@ -5,7 +5,7 @@ pushd build
   [ ! -d "camera_engine_rkaiq" ] && \
     git clone https://gitlab.com/rk3588_linux/linux/external/camera_engine_rkaiq.git --depth 1
 
-  apt install -y ninja-build m4 debhelper
+  sudo apt install -y ninja-build m4 debhelper
 
   mkdir -p builder
   pushd builder
