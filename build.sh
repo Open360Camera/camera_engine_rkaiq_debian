@@ -18,7 +18,7 @@ pushd build
     git clone https://gitlab.com/rk3588_linux/linux/buildroot.git
   popd
 
-  cp ../configs/.config builder/kernel/.config
+  cp ../configs/.config builder/buildroot/.config
   pushd builder/buildroot
     make -j 8
   popd
@@ -39,6 +39,7 @@ pushd build
       -DCMAKE_EXPORT_COMPILE_COMMANDS=YES \
       -DISP_HW_VERSION=${ISP_HW_VERSION} \
     .
+    echo "cmake result $?"
 
     ninja clean && ninja
 
