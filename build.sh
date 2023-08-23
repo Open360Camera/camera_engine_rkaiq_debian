@@ -18,7 +18,7 @@ pushd build
     git clone https://gitlab.com/rk3588_linux/linux/buildroot.git
   popd
 
-  cp ../configs/.config builder/buildroot/.config
+  cp ../configs/.config builder/kernel/.config
   pushd builder/buildroot
     make -j 8
   popd
