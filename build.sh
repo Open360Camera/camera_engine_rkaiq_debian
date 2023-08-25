@@ -31,6 +31,7 @@ pushd build
     TOOLCHAIN_FILE=$(pwd)/cmake/toolchains/aarch64_linux_buildroot.cmake
     export AIQ_BUILD_HOST_DIR=$(pwd)/../builder/buildroot/output/host
     cmake \
+      -G "Ninja" \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo\
       -DARCH="aarch64" \
       -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
@@ -49,9 +50,10 @@ pushd build
 
     mkdir -p ../source/root/etc/
     cp -r iqfiles/isp3x ../source/root/etc/iqfiles
+  popd
 
-    pushd ../source/
-      dpkg-buildpackage -us -uc --host-arch amd64
-    popd
+  ln -sf ../../debian source/
+  pushd source/
+    dpkg-buildpackage -us -uc --host-arch amd64
   popd
 popd
