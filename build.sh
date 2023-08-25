@@ -1,27 +1,19 @@
 mkdir -p build
 
+# this creates build/builder/buildroot/output/host directory
+# with all stuff that we need to build library
+# TODO: replace url with github url and pre-build buildroot in other project
+#       probably multiple times for different boards
+[ ! -f host.tar.gz ] && \
+  wget https://static.parkingdp.online/host.tar.gz --no-check-certificate && \
+  tar xf host.tar.gz
+
 pushd build
 
   [ ! -d "camera_engine_rkaiq" ] && \
     git clone https://gitlab.com/rk3588_linux/linux/external/camera_engine_rkaiq.git --depth 1
 
   sudo apt install -y ninja-build m4 debhelper
-
-  mkdir -p builder
-  pushd builder
-    git clone https://gitlab.com/rk3588_linux/rk/kernel.git --depth 1
-    mkdir -p external
-    pushd external
-      git clone https://gitlab.com/rk3588_linux/linux/linux-rga.git
-      git clone https://gitlab.com/rk3588_linux/linux/external/rktoolkit.git
-    popd
-    git clone https://gitlab.com/rk3588_linux/linux/buildroot.git
-  popd
-
-  cp ../configs/.config builder/buildroot/.config
-  pushd builder/buildroot
-    make -j 8
-  popd
 
   pushd camera_engine_rkaiq
     # load environment variables that we
