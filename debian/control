@@ -6,21 +6,21 @@ Build-Depends: debhelper (>= 9)
 Homepage: https://github.com/Open360Camera/camera_engine_rkaiq_debian
 
 Package: rkaiq
-Architecture: any
+Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}, rkaiq-iqfiles, librkaiq, rkaiq-dev, rkaiqd
 
 Package: rkaiq-iqfiles
-Architecture: any
+Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 
 Package: librkaiq
-Architecture: any
+Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 
 Package: rkaiqd
-Architecture: any
+Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 
 Package: rkaiq-dev
-Architecture: any
+Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}
