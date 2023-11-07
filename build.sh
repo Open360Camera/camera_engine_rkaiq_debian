@@ -46,6 +46,6 @@ pushd build
 
   ln -sf ../../debian source/
   pushd source/
-    dpkg-buildpackage -us -uc --host-arch amd64
+    dpkg-buildpackage -us -uc --host-arch arm64
   popd
 popd
